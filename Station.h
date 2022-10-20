@@ -1,24 +1,22 @@
-#include <string>
-
 #pragma once
-
-using namespace std;
 
 class Station {
 private:
-    int temp, pressure, windSpeed;
-    string windDirection;
+  int temp, pressure;
+
+protected:
+  int windSpeed, windDirection;
+
 public:
-    Station();
-    Station(int _temp, int _pressure, int _windSpeed, string _windDirection);
-    Station(const Station& other);
-    ~Station();
-    int getPressure() const;
-    int getWindSpeed() const;
-    int getTemp() const;
-    string getWindDirection() const;
-    void setPressure(int _pressure);
-    void setWindSpeed(int _windSpeed);
-    void setTemp(int _temp);
-    void setWindDirection(string _windDirection);
+  Station();
+  Station(int _temp, int _pressure, int _windSpeed, int _windDirection);
+  Station(const Station &other);
+  ~Station();
+  int getTemp() const;
+  int getPressure() const;
+  int getWindSpeed() const;
+  int getWindDirection() const;
+  void setAttributes(int _temp, int _pressure, int _windSpeed,
+                     int _windDirection);
+  virtual void printStation() const;
 };
