@@ -12,7 +12,6 @@ private:
 public:
   int size;
   Matrix(int _size);
-  Matrix();
   Matrix(const Matrix &other);
   void setSize(int _size);
   virtual ~Matrix();
@@ -23,4 +22,5 @@ public:
   void fileToMatrix(const string& path);
   Station interp(double a, double b) const;
   void printMatrix(Ui::MainWindow *ui) const;
+  bool compareMatrix(const Matrix& first, const Matrix& second)const;
 };

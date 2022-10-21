@@ -33,15 +33,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_add_clicked()
 {
-//    ui->textEdit->insertPlainText("123456789"+data.size);
-    //ui->row->text().toInt(),ui->col->text().toInt();
-//    Station *st;
-//    Vane v;
-//    st = &v;
-//    st->setAttributes(ui->temp->text().toInt(),ui->pres->text().toInt(),ui->speed->text().toInt(),ui->dorection->text().toInt());
-//    data.setItems(*st);
-//   ui->textEdit->clear();
-//   ui->textEdit->insertPlainText(QString::fromStdString(st->printStation()));
     if(Type==station){
         data.setItems(Station(ui->temp->text().toInt(),ui->pres->text().toInt(),ui->speed->text().toInt(),ui->dorection->text().toInt()));
     } else if(Type==vane){
@@ -99,7 +90,6 @@ void MainWindow::on_setSize_clicked()
 
 void MainWindow::on_Weather_clicked()
 {
-//    ui->weather_text->setText(ui->col_weather->text());
     ui->weather_text->setText(QString::fromStdString(data.interp(ui->col_weather->text().toDouble(),ui->row_weather->text().toDouble()).printStation()));
 }
 

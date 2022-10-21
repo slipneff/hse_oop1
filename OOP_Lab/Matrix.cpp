@@ -3,13 +3,14 @@
 #include <fstream>
 #include <iostream>
 #pragma once
+
+
+//оформление
+// vane -> station
+// setter по индексу
 Matrix::Matrix(int _size) {
   size = _size;
   matrix = new Station *[size];
-  count = 0;
-}
-Matrix::Matrix() {
-  size = 0;
   count = 0;
 }
 Matrix::Matrix(const Matrix &other) {
@@ -24,6 +25,8 @@ Matrix::~Matrix() {
 }
 
 void Matrix::setSize(int _size) {
+    //очистка памяти
+
   size = _size;
   matrix = new Station *[_size];
 }
@@ -31,6 +34,7 @@ void Matrix::setSize(int _size) {
 int Matrix::getCount() const { return count; }
 
 void Matrix::setItems(const Station &station) {
+    //тройной указатель, индентификатор класса типа проифать по условия идентификатора функции, назвать аппенд и сделать сет по индексу
   if (count % size == 0)
     matrix[count / size] = new Station[size];
   matrix[count / size][count % size] = station;
@@ -78,24 +82,6 @@ void Matrix::printMatrix(Ui::MainWindow *ui) const {
 
 Station Matrix::interp(double a, double b) const {
   int x0 = a, y0 = b, x1 = a, y1 = b, x2=0, x3=0, y2=0, y3=0;
-//  if (int(a) != a) {
-//    x0 = a;
-//    x1 = 1 + x0;
-//  }
-//  if (int(b) != b) {
-//    y0 = b;
-//    y1 = 1 + y0;
-//  }
-
-//  int interp_speed = matrix[x0][y0].getWindSpeed() * (1 - a) * (1 - b) +
-//                     matrix[x1][y0].getWindSpeed() * a * (1 - b) +
-//                     matrix[x0][y1].getWindSpeed() * (1 - a) * b +
-//                     matrix[x1][y1].getWindSpeed() * a * b;
-
-//  int interp_direction = matrix[x0][y0].getWindSpeed() * (1 - a) * (1 - b) +
-//                         matrix[x1][y0].getWindSpeed() * a * (1 - b) +
-//                         matrix[x0][y1].getWindSpeed() * (1 - a) * b +
-//                         matrix[x1][y1].getWindSpeed() * a * b;
 
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
@@ -133,7 +119,14 @@ Station Matrix::interp(double a, double b) const {
                         matrix[x2][y2].getPressure() * a * (1 - b) +
                         matrix[x1][y1].getPressure() * (1 - a) * b +
                         matrix[x3][y3].getPressure() * a * b;
-  qDebug<<interp_temp<<" "<<inter_pressure<<" "<<interp_speed<<" "<<interp_direction;
   return Station(interp_temp, interp_pressure, interp_speed, interp_direction);
 
+}
+
+bool Matrix::compareMatrix(const Matrix& first) {
+    for (int i = 0; i < size; i++)
+        for (int j = 0; j < size; j++)
+            if (matrix[i][j] != first.getItem(i, j))
+                return false;
+    return true;
 }
